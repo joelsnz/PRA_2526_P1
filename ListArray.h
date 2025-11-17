@@ -19,7 +19,7 @@ public:
 
   T operator[](int pos) const {
     if(pos >= 0 && pos < this->n) return this->arr[pos];
-    else throw std::out_of_range("Indice fuera de rango\n");
+    else throw std::out_of_range("Posicion invalida");
   }
 
   friend std::ostream &operator<<(std::ostream &out,
@@ -30,36 +30,43 @@ public:
       out << list[i];
     }
     out << "]";
+
     return out;
   }
 
   void resize(int new_size) {
     T *new_arr = new T[new_size];
     int limit = n < new_size ? n : new_size;
+
     for(int i = 0; i < limit; i++)
       new_arr[i] = this->arr[i];
+
     delete[] this->arr;
+
     this->arr = new_arr;
     this->max = new_size;
     if(n > new_size) n = new_size;
   }
 
-  virtual void insert(int pos, T e) {
-    if(pos < 0 || pos > n)
+  void insert(int pos, T e) override {
+    if(pos < 0 || pos > this->n)
       throw std::out_of_range("Posicion invalida");
-    if(n == max) resize(max * 2);
-    for(int i = n; i > pos; i--)
-      arr[i] = arr[i - 1];
-    arr[pos] = e;
-    n++;
+
+    if(this->n == this->max) resize(this->max * 2);
+
+    for(int i = this->n; i > pos; i--)
+      this->arr[i] = this->arr[i - 1];
+
+    this->arr[pos] = e;
+    this->n++;
   }
 
-  virtual void append(T e) { insert(n, e); }
+  void append(T e) override { insert(this->n, e); }
 
-  virtual void prepend(T e) { insert(0, e); }
+  void prepend(T e) override { insert(0, e); }
 
-  virtual T remove(int pos) {
-    if(pos < 0 || pos >= n)
+  T remove(int pos) override {
+    if(pos < 0 || pos >= this->n)
       throw std::out_of_range("Posicion invalida");
     T removed = this->arr[pos];
     for(int i = pos; i < this->n - 1; i++) {
@@ -69,22 +76,22 @@ public:
     return removed;
   }
 
-  virtual T get(int pos) const {
-    if(pos < 0 || pos >= n)
+  T get(int pos) const override {
+    if(pos < 0 || pos >= this->n)
       throw std::out_of_range("Posicion invalida");
     return this->arr[pos];
   }
 
-  virtual int search(T e) const {
+  int search(T e) const override {
     for(int i = 0; i < this->n; i++) {
       if(this->arr[i] == e) return i;
     }
     return -1;
   }
 
-  virtual bool empty() const { return this->n == 0; }
+  bool empty() const override { return this->n == 0; }
 
-  virtual int size() const { return this->n; }
+  int size() const override { return this->n; }
 };
 
 #endif // LISTARRAY_H
