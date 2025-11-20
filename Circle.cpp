@@ -1,5 +1,6 @@
 #include "Circle.h"
 #include <cmath>
+#include <iostream>
 
 Circle::Circle() : Shape(), center(Point2D()), radius(1) {}
 
@@ -36,4 +37,4 @@ void Circle::translate(double incX, double incY) {
   this->center.y += incY;
 }
 
-void Circle::print() { std::cout << *this }
+void Circle::print() { std::cout << *this; }

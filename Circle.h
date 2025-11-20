@@ -2,6 +2,7 @@
 #define CIRCLE_H
 
 #include "Shape.h"
+#include <iostream>
 #include <ostream>
 
 class Circle : public Shape{
@@ -17,6 +18,10 @@ public:
   double get_radius() const;
   void set_radius(double r);
   friend std::ostream& operator<<(std::ostream& out, const Circle& c);
+  double area() const override;
+  double perimeter() const override;
+  void translate(double incX, double incY) override;
+  void print() override;
 };
 
 #endif // CIRCLE_H
