@@ -1,30 +1,24 @@
 #include "Circle.h"
+
 #include <cmath>
 #include <iostream>
 
 Circle::Circle() : Shape(), center(Point2D()), radius(1) {}
 
-Circle::Circle(std::string color, Point2D center, double radius) :
-                Shape(color), center(center), radius(radius) {}
+Circle::Circle(std::string color, Point2D center, double radius)
+    : Shape(color), center(center), radius(radius) {}
 
-Point2D Circle::get_center() const {
-  return this->center;
-}
+Point2D Circle::get_center() const { return this->center; }
 
-void Circle::set_center(Point2D p) {
-  this->center = p;
-}
+void Circle::set_center(Point2D p) { this->center = p; }
 
-double Circle::get_radius() const {
-  return this->radius;
-}
+double Circle::get_radius() const { return this->radius; }
 
-void Circle::set_radius(double r) {
-  this->radius = r;
-}
+void Circle::set_radius(double r) { this->radius = r; }
 
-std::ostream& operator<<(std::ostream& out, const Circle& c) {
-  out << "Center: " << c.center << "\tRadius: " << c.radius;
+std::ostream &operator<<(std::ostream &out, const Circle &c) {
+  out << "[Circle: color = " << c.color << "; ";
+  out << "center = " << c.center << "; radius = " << c.radius << "]";
   return out;
 }
 

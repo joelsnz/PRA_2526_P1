@@ -9,7 +9,7 @@ Shape::Shape(std::string color) {
     if(color == c) {
       is_valid = true;
       break;
-    } 
+    }
   }
 
   if(!is_valid) throw std::invalid_argument("color invalido");
@@ -18,3 +18,5 @@ Shape::Shape(std::string color) {
 }
 
 std::string Shape::get_color() const { return this->color; }
+
+void Shape::set_color(std::string c) { this->color = c; }
