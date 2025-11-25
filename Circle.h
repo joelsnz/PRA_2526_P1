@@ -2,10 +2,11 @@
 #define CIRCLE_H
 
 #include "Shape.h"
+
 #include <iostream>
 #include <ostream>
 
-class Circle : public Shape{
+class Circle : public Shape {
 private:
   Point2D center;
   double radius;
@@ -17,7 +18,7 @@ public:
   void set_center(Point2D p);
   double get_radius() const;
   void set_radius(double r);
-  friend std::ostream& operator<<(std::ostream& out, const Circle& c);
+  friend std::ostream &operator<<(std::ostream &out, const Circle &c);
   double area() const override;
   double perimeter() const override;
   void translate(double incX, double incY) override;
