@@ -1,8 +1,9 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <string>
 #include "Point2D.h"
+
+#include <string>
 
 class Shape {
 protected:
@@ -19,4 +20,4 @@ public:
   virtual void print() = 0;
 };
 
-#endif
+#endif // SHAPE_H
