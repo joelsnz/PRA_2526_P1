@@ -16,10 +16,11 @@ public:
   ListLinked() : first(nullptr), n(0) {}
 
   ~ListLinked() {
-    Node<T> *aux;
-    while((aux = this->first->next)) {
-      delete this->first;
-      this->first = aux;
+    Node<T> *aux = this->first;
+    while(aux != nullptr) {
+      Node<T> *next = aux->next;
+      delete aux;
+      aux = next;
     }
   }
 
