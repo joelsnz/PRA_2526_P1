@@ -20,7 +20,7 @@ Rectangle::Rectangle() : Shape() {
 Rectangle::Rectangle(std::string color, Point2D *vertices)
     : Shape(color) {
   if(!Rectangle::check(vertices))
-    throw std::invalid_argument("Rectangulo invalido");
+    throw std::invalid_argument("Provided vertices do not build a valid rectangle");
   this->vs = new Point2D[N_VERTICES];
   for(int i = 0; i < N_VERTICES; i++)
     this->vs[i] = vertices[i];
@@ -35,7 +35,7 @@ Rectangle::Rectangle(const Rectangle &r) : Shape(r.color) {
 Rectangle::~Rectangle() { delete[] this->vs; }
 
 Point2D Rectangle::get_vertex(int ind) const {
-  if(ind >= N_VERTICES) throw std::out_of_range("Indice invalido");
+  if(ind >= N_VERTICES) throw std::out_of_range("Invalid index");
   return this->vs[ind];
 }
 
@@ -45,7 +45,7 @@ Point2D Rectangle::operator[](int ind) const {
 
 void Rectangle::set_vertices(Point2D *vertices) {
   if(!Rectangle::check(vertices))
-    throw std::invalid_argument("Rectangulo invalido");
+    throw std::invalid_argument("Provided vertices do not build a valid rectangle");
   this->vs = new Point2D[N_VERTICES];
   for(int i = 0; i < N_VERTICES; i++)
     this->vs[i] = vertices[i];

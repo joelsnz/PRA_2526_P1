@@ -20,14 +20,14 @@ Square::Square() : Rectangle() {
 Square::Square(std::string color, Point2D *vertices) : Rectangle() {
   this->color = color;
   if(!Square::check(vertices))
-    throw std::invalid_argument("Cuadrado invalido");
+    throw std::invalid_argument("Provided vertices do not build a valid square");
   for(int i = 0; i < N_VERTICES; i++)
     this->vs[i] = vertices[i];
 }
 
 void Square::set_vertices(Point2D *vertices) {
   if(!Square::check(vertices))
-    throw std::invalid_argument("Cuadrado invalido");
+    throw std::invalid_argument("Provided vertices do not build a valid square");
   for(int i = 0; i < N_VERTICES; i++)
     this->vs[i] = vertices[i];
 }

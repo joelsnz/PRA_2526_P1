@@ -40,10 +40,10 @@ public:
                                   const ListLinked<T> &list) {
     Node<T> *aux = list.first;
 
-    out << "[";
+    out << "List => [";
+    if(aux != nullptr) out << std::endl;
     while(aux != nullptr) {
-      out << aux->data;
-      if(aux->next) out << ", ";
+      out << "  " << aux->data << std::endl;
       aux = aux->next;
     }
     out << "]";

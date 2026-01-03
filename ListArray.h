@@ -24,10 +24,10 @@ public:
 
   friend std::ostream &operator<<(std::ostream &out,
                                   const ListArray<T> &list) {
-    out << "[";
+    out << "List => [";
     for(int i = 0; i < list.n; i++) {
-      if(i > 0) out << ", ";
-      out << list[i];
+      if(i == 0) out << std::endl;
+      out << "  " << list[i] << std::endl;
     }
     out << "]";
 
