@@ -22,8 +22,7 @@ public:
   Point2D operator[](int ind) const;
   virtual void set_vertices(Point2D *vertices);
   Rectangle &operator=(const Rectangle &r);
-  friend std::ostream &operator<<(std::ostream &out,
-                                  const Rectangle &r);
+  friend std::ostream &operator<<(std::ostream &out, const Rectangle &r);
   double area() const override;
   double perimeter() const override;
   void translate(double incX, double incY) override;

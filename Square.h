@@ -15,8 +15,7 @@ public:
   Square();
   Square(std::string color, Point2D *vertices);
   void set_vertices(Point2D *vertices) override final;
-  friend std::ostream &operator<<(std::ostream &out,
-                                  const Square &square);
+  friend std::ostream &operator<<(std::ostream &out, const Square &square);
 };
 
 #endif // SQUARE_H

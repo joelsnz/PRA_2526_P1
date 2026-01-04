@@ -11,30 +11,32 @@ bool Square::check(Point2D *vertices) {
 }
 
 Square::Square() : Rectangle() {
-  this->vs[0] = Point2D(-1, 1);
-  this->vs[1] = Point2D(1, 1);
-  this->vs[2] = Point2D(1, -1);
-  this->vs[3] = Point2D(-1, -1);
+  vs[0] = Point2D(-1, 1);
+  vs[1] = Point2D(1, 1);
+  vs[2] = Point2D(1, -1);
+  vs[3] = Point2D(-1, -1);
 }
 
 Square::Square(std::string color, Point2D *vertices) : Rectangle() {
   this->color = color;
-  if(!Square::check(vertices))
-    throw std::invalid_argument("Provided vertices do not build a valid square");
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = vertices[i];
+  if (!Square::check(vertices))
+    throw std::invalid_argument(
+        "Provided vertices do not build a valid square");
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = vertices[i];
 }
 
 void Square::set_vertices(Point2D *vertices) {
-  if(!Square::check(vertices))
-    throw std::invalid_argument("Provided vertices do not build a valid square");
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = vertices[i];
+  if (!Square::check(vertices))
+    throw std::invalid_argument(
+        "Provided vertices do not build a valid square");
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = vertices[i];
 }
 
 std::ostream &operator<<(std::ostream &out, const Square &square) {
   out << "[Square: color = " << square.color;
-  for(int i = 0; i < Rectangle::N_VERTICES; i++) {
+  for (int i = 0; i < Rectangle::N_VERTICES; i++) {
     out << "; v" << i << " = " << square.vs[i];
   }
   out << "]";

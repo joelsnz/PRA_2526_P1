@@ -16,8 +16,8 @@ public:
   ListLinked() : first(nullptr), n(0) {}
 
   ~ListLinked() {
-    Node<T> *aux = this->first;
-    while(aux != nullptr) {
+    Node<T> *aux = first;
+    while (aux != nullptr) {
       Node<T> *next = aux->next;
       delete aux;
       aux = next;
@@ -25,15 +25,16 @@ public:
   }
 
   T operator[](int pos) {
-    Node<T> *aux = this->first;
+    Node<T> *aux = first;
 
     int i = 0;
-    while(aux != nullptr && i++ != pos) {
+    while (aux != nullptr && i++ != pos)
       aux = aux->next;
-    }
 
-    if(aux != nullptr) return aux->data;
-    else throw std::out_of_range("Posicion invalida");
+    if (aux != nullptr)
+      return aux->data;
+    else
+      throw std::out_of_range("Posicion invalida");
   }
 
   friend std::ostream &operator<<(std::ostream &out,
@@ -41,8 +42,9 @@ public:
     Node<T> *aux = list.first;
 
     out << "List => [";
-    if(aux != nullptr) out << std::endl;
-    while(aux != nullptr) {
+    if (aux != nullptr)
+      out << std::endl;
+    while (aux != nullptr) {
       out << "  " << aux->data << std::endl;
       aux = aux->next;
     }
@@ -52,18 +54,18 @@ public:
   }
 
   void insert(int pos, T e) override {
-    if(pos < 0 || pos > this->n)
+    if (pos < 0 || pos > n)
       throw std::out_of_range("Posicion invalida");
 
-    Node<T> *aux = this->first;
-    if(pos == 0) {
-      this->first = new Node<T>(e, this->first);
-    } else if(pos == this->n) {
-      while(aux->next != nullptr)
+    Node<T> *aux = first;
+    if (pos == 0) {
+      first = new Node<T>(e, first);
+    } else if (pos == n) {
+      while (aux->next != nullptr)
         aux = aux->next;
       aux->next = new Node<T>(e);
     } else {
-      for(int i = 0; i < pos - 1; i++) {
+      for (int i = 0; i < pos - 1; i++) {
         aux = aux->next;
       }
       aux->next = new Node<T>(e, aux->next);
@@ -77,47 +79,52 @@ public:
   void prepend(T e) override { insert(0, e); }
 
   T remove(int pos) override {
-    if(pos < 0 || pos >= this->n)
+    if (pos < 0 || pos >= n)
       throw std::out_of_range("Posicion invalida");
 
     Node<T> *prev = nullptr;
-    Node<T> *aux = this->first;
+    Node<T> *aux = first;
     Node<T> *to_delete = nullptr;
 
     int i = 0;
-    while(aux != nullptr && i != pos) {
+    while (aux != nullptr && i != pos) {
       prev = aux;
       aux = aux->next;
       i++;
     }
-    if(aux == this->first) this->first = this->first->next;
-    else prev->next = aux->next;
+    if (aux == first)
+      first = first->next;
+    else
+      prev->next = aux->next;
 
     to_delete = aux;
     T data = aux->data;
     delete to_delete;
-    this->n--;
+    n--;
 
     return data;
   }
 
   T get(int pos) const override {
-    Node<T> *aux = this->first;
+    Node<T> *aux = first;
 
     int i = 0;
-    while(aux != nullptr && i != pos) {
+    while (aux != nullptr && i != pos) {
       aux = aux->next;
       i++;
     }
 
-    if(aux != nullptr) return aux->data;
-    else throw std::out_of_range("Posicion invalida");
+    if (aux != nullptr)
+      return aux->data;
+    else
+      throw std::out_of_range("Posicion invalida");
   }
 
   int search(T e) const override {
-    Node<T> *aux = this->first;
-    for(int i = 0; i < this->n; i++) {
-      if(aux->data == e) return i;
+    Node<T> *aux = first;
+    for (int i = 0; i < n; i++) {
+      if (aux->data == e)
+        return i;
       aux = aux->next;
     }
 

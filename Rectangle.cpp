@@ -10,60 +10,62 @@ bool Rectangle::check(Point2D *vertices) {
 }
 
 Rectangle::Rectangle() : Shape() {
-  this->vs = new Point2D[N_VERTICES];
-  this->vs[0] = Point2D(-1, 0.5);
-  this->vs[1] = Point2D(1, 0.5);
-  this->vs[2] = Point2D(1, -0.5);
-  this->vs[3] = Point2D(-1, -0.5);
+  vs = new Point2D[N_VERTICES];
+  vs[0] = Point2D(-1, 0.5);
+  vs[1] = Point2D(1, 0.5);
+  vs[2] = Point2D(1, -0.5);
+  vs[3] = Point2D(-1, -0.5);
 }
 
-Rectangle::Rectangle(std::string color, Point2D *vertices)
-    : Shape(color) {
-  if(!Rectangle::check(vertices))
-    throw std::invalid_argument("Provided vertices do not build a valid rectangle");
-  this->vs = new Point2D[N_VERTICES];
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = vertices[i];
+Rectangle::Rectangle(std::string color, Point2D *vertices) : Shape(color) {
+  if (!Rectangle::check(vertices))
+    throw std::invalid_argument(
+        "Provided vertices do not build a valid rectangle");
+
+  vs = new Point2D[N_VERTICES];
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = vertices[i];
 }
 
 Rectangle::Rectangle(const Rectangle &r) : Shape(r.color) {
-  this->vs = new Point2D[N_VERTICES];
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = r.vs[i];
+  vs = new Point2D[N_VERTICES];
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = r.vs[i];
 }
 
-Rectangle::~Rectangle() { delete[] this->vs; }
+Rectangle::~Rectangle() { delete[] vs; }
 
 Point2D Rectangle::get_vertex(int ind) const {
-  if(ind >= N_VERTICES) throw std::out_of_range("Invalid index");
-  return this->vs[ind];
+  if (ind >= N_VERTICES)
+    throw std::out_of_range("Invalid index");
+  return vs[ind];
 }
 
-Point2D Rectangle::operator[](int ind) const {
-  return get_vertex(ind);
-}
+Point2D Rectangle::operator[](int ind) const { return get_vertex(ind); }
 
 void Rectangle::set_vertices(Point2D *vertices) {
-  if(!Rectangle::check(vertices))
-    throw std::invalid_argument("Provided vertices do not build a valid rectangle");
-  this->vs = new Point2D[N_VERTICES];
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = vertices[i];
+  if (!Rectangle::check(vertices))
+    throw std::invalid_argument(
+        "Provided vertices do not build a valid rectangle");
+
+  vs = new Point2D[N_VERTICES];
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = vertices[i];
 }
 
 Rectangle &Rectangle::operator=(const Rectangle &r) {
-  this->color = r.color;
-  delete[] this->vs;
-  this->vs = new Point2D[N_VERTICES];
-  for(int i = 0; i < N_VERTICES; i++)
-    this->vs[i] = r.vs[i];
+  color = r.color;
+  delete[] vs;
+  vs = new Point2D[N_VERTICES];
+  for (int i = 0; i < N_VERTICES; i++)
+    vs[i] = r.vs[i];
 
   return *this;
 }
 
 std::ostream &operator<<(std::ostream &out, const Rectangle &r) {
   out << "[Rectangle: color = " << r.color;
-  for(int i = 0; i < Rectangle::N_VERTICES; i++) {
+  for (int i = 0; i < Rectangle::N_VERTICES; i++) {
     out << "; v" << i << " = " << r.vs[i];
   }
   out << "]";
@@ -72,23 +74,23 @@ std::ostream &operator<<(std::ostream &out, const Rectangle &r) {
 }
 
 double Rectangle::area() const {
-  double base = Point2D::distance(this->vs[2], this->vs[3]);
-  double altura = Point2D::distance(this->vs[0], this->vs[3]);
+  double base = Point2D::distance(vs[2], vs[3]);
+  double altura = Point2D::distance(vs[0], vs[3]);
 
   return base * altura;
 }
 
 double Rectangle::perimeter() const {
-  double base = Point2D::distance(this->vs[2], this->vs[3]);
-  double altura = Point2D::distance(this->vs[0], this->vs[3]);
+  double base = Point2D::distance(vs[2], vs[3]);
+  double altura = Point2D::distance(vs[0], vs[3]);
 
   return (base + altura) * 2;
 }
 
 void Rectangle::translate(double incX, double incY) {
-  for(int i = 0; i < N_VERTICES; i++) {
-    this->vs[i].x += incX;
-    this->vs[i].y += incY;
+  for (int i = 0; i < N_VERTICES; i++) {
+    vs[i].x += incX;
+    vs[i].y += incY;
   }
 }
 
